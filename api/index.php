@@ -15,12 +15,10 @@ require_once "includes/error.php";
 require_once "includes/getRandonString.php";
 
 //user
-require_once "resources/users/regUser.php";
-require_once "resources/users/getAllUsers.php";
-require_once "resources/users/checkOtp.php";
-
-require_once "resources/company/getCompanyTypes.php";
-require_once "resources/industry/getIndustryTypes.php";
+require_once "resources/org/createCampaign.php";
+require_once "resources/org/customer/checkCustomerTransactionOtp.php";
+require_once "resources/org/customer/debitCustomer.php";
+require_once "resources/org/customer/topupCustomer.php";
 require_once "resources/auth/postUserAuth.php";
 
 

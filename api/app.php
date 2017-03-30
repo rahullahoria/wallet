@@ -19,9 +19,10 @@ $app->response->headers->set('Content-Type', 'application/json');
 
 /* Starting routes */
 
-$app->get('/users','getAllUsers');
-$app->get('/mobile/:mobile/otp/:otp','checkOtp');
-$app->post('/users', 'regUser');
+
+$app->post('/org/:org/credit', 'topupCustomer');
+$app->post('/org/:org/mobile/:mobile/amount/:amount', 'topupCustomer');
+$app->get('/org/:org/mobile/:mobile/otp/:otp', 'topupCustomer');
 
 $app->get('/company_type','getCompanyTypes');
 $app->get('/industry','getIndustryTypes');
