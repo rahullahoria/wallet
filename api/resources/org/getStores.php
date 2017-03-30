@@ -66,7 +66,7 @@ AND a.type = 'debit' ) AS floating_amount";
             foreach($stores as $store){
                 if($tStore->id == $store->id){
                     $done = true;
-                    $store['trans'][] =  array($tStore->type => $tStore->amount);
+                    $store['trans'][] =  array($tStore->type => $tStore->sum);
 
                 }
             }
@@ -79,7 +79,7 @@ AND a.type = 'debit' ) AS floating_amount";
                 $stmt->execute();
                 $FA = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-                $stores[] = array('id' => $tStore->id, 'floating_amount'=> $FA[0]->floating_amount,'name' => $tStore->name,'trans' => array(array($tStore->type => $tStore->amount)));
+                $stores[] = array('id' => $tStore->id, 'floating_amount'=> $FA[0]->floating_amount,'name' => $tStore->name,'trans' => array(array($tStore->type => $tStore->sum)));
 
             }
         }
