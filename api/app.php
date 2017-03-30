@@ -22,6 +22,7 @@ $app->response->headers->set('Content-Type', 'application/json');
 
 $app->post('/org/:org/credit', 'topupCustomer');
 $app->post('/org/:org/debit', 'debitCustomer');
+$app->get('/org/:org/stores', 'getStores');
 $app->get('/org/:org/mobile/:mobile/otp/:otp', 'checkCustomerTransactionOtp');
 
 
