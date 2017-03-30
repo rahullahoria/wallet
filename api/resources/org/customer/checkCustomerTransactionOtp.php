@@ -44,7 +44,12 @@ function checkCustomerTransactionOtp($org,$mobile, $otp){
 
                 $stmt->execute();
             }
-            $message = "You topup of Rs.".($trans[0]->amount+$trans[0]->amount*0.1)." done successfully.\ncheck your balance @\nhttps://wallet.shatkonlabs.com/me";
+            if($tran->type == 'debit'){
+                $at = $trans[0]->amount;
+            }
+            else
+                $at = $trans[0]->amount+$trans[0]->amount*0.1;
+            $message = $trans[0]->type." of Rs.".$at." done successfully.\ncheck your balance @\nhttps://wallet.shatkonlabs.com/me";
             sendSMS($mobile, $message);
 
 
