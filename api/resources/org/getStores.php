@@ -64,7 +64,7 @@ AND a.type = 'debit' ) AS floating_amount";
         foreach($tStores as $tStore){
             $done = false;
             foreach($stores as $store){
-                if($tStore->id == $store->id){
+                if($tStore->id == $store['id']){
                     $done = true;
                     $store['trans'][] =  array($tStore->type => $tStore->sum);
 
