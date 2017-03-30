@@ -15,7 +15,7 @@ function checkCustomerTransactionOtp($org,$mobile, $otp){
                   b.org_id = :org AND
                   b.mobile =:mobile AND
                   a.status = 'in-process'
-                 and b.sms_otp =:otp ;";
+                 and a.sms_otp =:otp ;";
 
 
     $updateOTP = "update transactions set status = 'done' where id=:id";
