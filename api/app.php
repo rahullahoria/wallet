@@ -21,8 +21,8 @@ $app->response->headers->set('Content-Type', 'application/json');
 
 
 $app->post('/org/:org/credit', 'topupCustomer');
-$app->post('/org/:org/mobile/:mobile/amount/:amount', 'topupCustomer');
-$app->get('/org/:org/mobile/:mobile/otp/:otp', 'topupCustomer');
+$app->post('/org/:org/mobile/:mobile/amount/:amount', 'debitCustomer');
+$app->get('/org/:org/mobile/:mobile/otp/:otp', 'checkCustomerTransactionOtp');
 
 $app->get('/company_type','getCompanyTypes');
 $app->get('/industry','getIndustryTypes');

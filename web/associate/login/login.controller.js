@@ -78,21 +78,7 @@
             console.log(vm.user);
         };
 
-        vm.startDemoTest = function(){
-            CandidateService.StartDemoTest(vm.inUser.md5
-                )
-                .then(function (response) {
-                    vm.subjects = response.response;
 
-                    console.log('member',vm.subjects);
-
-                    $cookieStore.put('tests', JSON.stringify(vm.subjects));
-                    $cookieStore.put('topic_name', 'Mix Topics');
-                    $cookieStore.put('subject_name', 'All Subjects');
-
-                    $location.path('/test');
-                });
-        }
 
         vm.checkOTP = function(type){
             if(type == 'skip'){
@@ -140,6 +126,7 @@
 
         function login() {
             vm.dataLoading = true;
+            vm.user.type = 'till';
             AuthenticationService.Login(vm.user, function (resp) {
                 console.log("resp",resp);
 
