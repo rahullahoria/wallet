@@ -6,7 +6,7 @@
  * Time: 5:22 PM
  */
 
-function debitCustomer($org, $mobile, $amount){
+function debitCustomer($org){
 
     $request = \Slim\Slim::getInstance()->request();
 
@@ -40,11 +40,11 @@ function debitCustomer($org, $mobile, $amount){
 
             $stmt = $db->prepare($creditSql);
             $otp = getOTP();
-            $message = "Debit of Rs.$amount will happen from your account\nyour OTP\n " . $otp;
+            $message = "Debit of Rs.$requestJson->amount will happen from your account\nyour OTP\n " . $otp;
             sendSMS($requestJson->mobile, $message);
             //var_dump($requestJson);
             $type = 'debit';
-            $stmt->bindParam("amount", $amount);
+            $stmt->bindParam("amount", $requestJson->amount);
             $stmt->bindParam("type", $type);
             $stmt->bindParam("customer_id", $requestJson->customer_id);
             $stmt->bindParam("associate_id", $requestJson->associate_id);
