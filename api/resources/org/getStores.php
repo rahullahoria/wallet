@@ -14,7 +14,7 @@ function getStores($org){
                     WHERE DATE(a.creation) = CURDATE() and a.associate_id = b.id and b.store_id = c.id and c.org_id = :org group by c.id,c.name,a.type";
     $orgFloting = "
 
-SELECT a.type, sum( a.amount )
+SELECT a.type, sum( a.amount ) as amount
 FROM `transactions` AS a
 INNER JOIN associates AS b
 INNER JOIN stores AS c
@@ -26,20 +26,8 @@ AND b.store_id =1
 GROUP BY a.type;
 ";
 
-    $storeFloatingAmount = "SELECT (
-
-SELECT sum( a.amount )
-FROM `transactions` AS a
-INNER JOIN associates AS b
-INNER JOIN stores AS c
-WHERE DATE( a.creation ) = CURDATE( )
-AND a.associate_id = b.id
-AND b.store_id = c.id
-AND c.org_id =1
-AND b.store_id =1
-AND a.type != 'debit'
-) - (
-SELECT sum( a.amount )
+    $storeFloatingAmount = "
+SELECT a.type,sum( a.amount ) as amount
 FROM `transactions` AS a
 INNER JOIN associates AS b
 INNER JOIN stores AS c
@@ -48,7 +36,7 @@ AND a.associate_id = b.id
 AND b.store_id = c.id
 AND c.org_id =:org
 AND b.store_id =:store_id
-AND a.type = 'debit' ) AS floating_amount";
+GROUP BY a.type";
 
     try {
 
@@ -100,7 +88,7 @@ AND a.type = 'debit' ) AS floating_amount";
 
         $db = null;
 
-        echo '{"company_type": ' . json_encode($returnArr) . '}';
+        echo '{"store_details": ' . json_encode($returnArr) . '}';
 
 
 
