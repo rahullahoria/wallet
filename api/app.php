@@ -24,8 +24,7 @@ $app->post('/org/:org/credit', 'topupCustomer');
 $app->post('/org/:org/mobile/:mobile/amount/:amount', 'debitCustomer');
 $app->get('/org/:org/mobile/:mobile/otp/:otp', 'checkCustomerTransactionOtp');
 
-$app->get('/company_type','getCompanyTypes');
-$app->get('/industry','getIndustryTypes');
+
 $app->post('/auth', 'userAuth');
 
 /* Ending Routes */
