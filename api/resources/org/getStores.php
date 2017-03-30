@@ -67,7 +67,7 @@ GROUP BY a.type";
                 $stmt->execute();
                 $FA = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-                $stores[] = array('id' => $tStore->id, 'floating_amount'=> $FA[0]->floating_amount,'name' => $tStore->name,'trans' => array(array($tStore->type => $tStore->sum)));
+                $stores[] = array('id' => $tStore->id, 'amounts'=> $FA,'name' => $tStore->name,'trans' => array(array($tStore->type => $tStore->sum)));
 
             }
         }
