@@ -13,7 +13,7 @@ function checkCustomerTransactionOtp($org,$mobile, $otp){
                 FROM transactions as a INNER JOIN customers as b
                  WHERE a.customer_id = b.id AND
                   b.org_id = :org AND
-                  a.mobile =:mobile AND
+                  b.mobile =:mobile AND
                   a.status = 'in-process'
                  and b.sms_otp =:otp ;";
 
