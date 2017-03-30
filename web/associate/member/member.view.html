@@ -1,177 +1,195 @@
 ﻿
-<div id="wrapper">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">ExamHans | Learn and Earn</a>
-        </div>
-        <!-- /.navbar-header -->
-        <ul class="nav navbar-top-links navbar-right">
-
-            <li><a href="#/employee/{{ vm.inUser.md5_id }}"><i class="fa fa-user fa-fw"></i> {{ vm.inUser.username}}</a>
-            </li>
-            <!--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings </a>
-            </li>-->
-            <li class="divider"></li>
-            <li><a ng-click="vm.logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-            </li>
-
-
-
-        </ul>
-
-
-
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-
-                    <li>
-                        <a href="#/member" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
-
-                    <!--<li>
-                        <a href="#/employee/{{ vm.inUser.md5_id }}"><i class="fa fa-table fa-fw"></i> My Performance</a>
-                    </li>-->
-
-                    <!--<li>
-                        <a href="#"><i class="glyphicon glyphicon-cog fa-fw"></i> Settings</a>
-                    </li>-->
-                    <li>
-                        <a ng-click="vm.logout()"><i class="glyphicon glyphicon-off fa-fw"></i> Logout</a>
-                    </li>
-
-                </ul>
-            </div>
-            <!-- /.sidebar-collapse -->
-        </div>
-        <!-- /.navbar-static-side -->
-    </nav>
-
-    <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Dashboard</h1>
-            </div>
-
-        </div>
-        <!-- /.row -->
-        <br/>
-        <div class="row">
-            <div class="col-lg-3 col-md-6" ng-repeat="subject in vm.subjects">
-                <div class="panel {{ ($index == vm.currentShow)?'panel-success':'panel-primary' }}">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-question-circle  fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div ><b>{{ subject.subject_name }}</b></div>
-                                <div>Question : {{subject.subjectTotalQ}} </div>
-                                <div>Topics : {{subject.noOfTopics}} </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a ng-click="vm.currentShow = $index">
-                        <div class="panel-footer">
-                            <span class="pull-left">Select</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-
-        </div>
-        <!-- /.row -->
-        <div class="row">
-            <div class="col-lg-12" ng-show="$index == vm.currentShow" id="subject-{{$index}}"  ng-repeat="subject in vm.subjects">
-
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <i class="fa fa-list fa-fw"></i> {{ subject.subject_name }} | Total Question <i class="fa fa-question-circle fa-fw"></i> : {{subject.subjectTotalQ}} | Topics <i class="fa fa-anchor fa-fw"></i> : {{ subject.noOfTopics }}
-                        <!--<div class="pull-right">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                    {{ vm.whichMonth.name }}
-                                    <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu pull-right" role="menu">
-                                    <li ng-repeat="month in vm.threeMonths" >
-                                        <a ng-click="vm.currentMonthIndex=$index;vm.setCurrentMon()">{{ month.name }}</a>
-                                    </li>
-
-                                    <li class="divider"></li>
-                                    <li><a href="">Currently for {{ vm.whichMonth.name }}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>-->
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body" >
-                        <div class="table-responsive">
-
-                        <table datatable="ng"  class="table table-bordered table-hover table-striped" style="max-width: 99%;">
-                            <thead>
-                            <tr>
-                                <th>Topic <i class="fa fa-anchor fa-fw"></i></th>
-                                <th>Prepare <i class="fa fa-bicycle fa-fw"></i></th></th>
-                                <th>#Question <i class="fa fa-question-circle fa-fw"></i></th>
-                                <th>Earned <i class="fa fa-university fa-fw"></i></th></th>
-                                <th>Status <i class="fa fa-coffee  fa-fw"></i></th></th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            <tr ng-repeat="topic in subject.topics"  class="{{ (topic.amount_made==null)?'warning':'success' }}">
-
-                                <td>
-                                    <a ng-click="vm.startTest(topic.topic_id,topic.no_of_question, topic.test_id,topic.topic_name,subject.subject_name,topic.atomic )">{{ topic.topic_name }}</a>
-                                </td>
-                                <td>
-                                    <a href="#/prepare/{{topic.topic_name }}/{{topic.topic_id}}">Start Preparation</a>
-                                </td>
-                                <td>
-                                    {{ topic.no_of_question }}
-
-                                </td>
-
-                                <td>{{ (topic.amount_made==null)?'Not Done':topic.amount_made+'&#8377;' }}</td>
-                                <td>{{ (topic.amount_made==null)?'Start Test':'Done' }} </td>
-
-
-                            </tr>
-
-                            </tbody>
-                        </table>
-                            </div>
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-
-            <hr>
-            </div>
-            <!-- /.col-lg-8 -->
-
-        </div>
-        <!-- /.row -->
+<div class="container" style="overflow-y: hidden ! important;
+            overflow-x: hidden ! important;
+                    background-image: url('http://cdn.pcwallart.com/images/mute-swan-flying-wallpaper-4.jpg');
+                    background-size:cover;background-repeat: no-repeat;
+    background-position: top;">
+    <div class="center" style="text-align: center;">
 
 
     </div>
-    <!-- /#page-wrapper -->
+    <br>
+    <br>
+    <br>
+
+    <div class="row" ng-show="vm.showVerification" >
+        <div class="col-md-4 col-md-offset-4">
+            <br>
+            <br>
+            <br>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Verification</h3>
+                </div>
+                <div class="panel-body">
+
+                    <form role="form"  role="form">
+                        <fieldset>
+
+                            <div class="form-group" ng-hide="vm.user.sms_verified" ng-class="{ 'has-error': form.mobile_otp.$dirty && form.mobile_otp.$error.required }">
+                                {{  vm.inUser.mobile }}
+                                <input class="form-control" placeholder="Mobile OTP" type="text" name="mobile_otp" id="mobile_otp" ng-model="vm.user.sms_otp" required >
+                                <span ng-show="form.mobile_otp.$dirty && form.mobile_otp.$error.required" class="help-block">Mobile OTP is required</span>
+                                <a ng-click="vm.checkOTP('sms')" >Verify</a>
+                            </div>
+
+                            <br>
+                            <br>
+
+                            <!--<div class="form-group" ng-hide="vm.user.email_verified" ng-class="{ 'has-error': form.email_otp.$dirty && form.email_otp.$error.required }">
+                                {{  vm.inUser.email }}
+                                <input type="text" name="email_otp" placeholder="Email OTP" id="email_otp" class="form-control" ng-model="vm.user.email_otp"  />
+                                <span ng-show="form.email_otp.$dirty && form.email_otp.$error.required" class="help-block">Email OTP is required</span>
+                                <a ng-click="vm.checkOTP('email')" >Verify</a>
+                            </div>-->
+
+
+                            <br>
+                            <br>
+                            <br>
+                            <a ng-show="vm.user.sms_verified" ng-click="vm.checkOTP('skip')" >Start Test</a>
+
+                            <!--<div class="form-actions">
+                                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-lg btn-primary btn-block">Login</button>
+                                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+                            </div>-->
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-hide="vm.showVerification" >
+        <div class="col-md-4 col-md-offset-4" ng-hide="vm.regR">
+            <br>
+            <br>
+            <br>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Customer Transactions</h3>
+                </div>
+                <div class="panel-body">
+
+                    <form role="form" ng-submit="vm.transaction()" role="form">
+                        <fieldset>
+
+                            <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+                                <input class="form-control" placeholder="Mobile" type="text" name="username" id="username" ng-model="vm.user.mobile" required >
+                                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Email is required</span>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                                <input type="number" name="password" placeholder="Amount" id="password" class="form-control" ng-model="vm.user.amount" required />
+                                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-lg btn-primary col-md-6" ng-click="vm.user.type = 'credit'">Credit</button>
+                                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-lg btn-primary col-md-6" ng-click="vm.user.type = 'debit'">Debit</button>
+                                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+                            </div>
+
+
+                        </fieldset>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-md-offset-4" ng-show="vm.regR">
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{ (vm.user.enable_buy_plan)?'Buy '+vm.plans[vm.user.buy_plan].name+' Plan':'Register For Demo'}}
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" ng-submit="vm.reg()" role="form">
+                        <fieldset>
+                            <div class="form-group" ng-show="vm.user.enable_buy_plan" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+                                <input class="form-control" placeholder="Full Name" type="text" name="username" id="reg_username" ng-model="vm.user.reg_username"  >
+                                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username Name is required</span>
+                            </div>
+                            <div class="form-group" ng-show="vm.user.enable_buy_plan" ng-class="{ 'has-error': form.email_reg.$dirty && form.email_reg.$error.required }">
+                                <input class="form-control" placeholder="E-mail" type="text" name="email" id="email_reg" ng-model="vm.user.email"  >
+                                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Email is required</span>
+                            </div>
+
+                            <div class="form-group" ng-class="{ 'has-error': form.mobile.$dirty && form.mobile.$error.required }">
+                                <input class="form-control" placeholder="Mobile" type="text" name="mobile" id="mobile" ng-model="vm.user.mobile" required >
+                                <span ng-show="form.mobile.$dirty && form.mobile.$error.required" class="help-block">Mobile No. Name is required</span>
+                            </div>
+
+
+
+                            <div class="form-group" ng-show="vm.user.enable_buy_plan" ng-class="{ 'has-error': form.password_reg.$dirty && form.password.$error.required }">
+                                <input type="password" name="password" placeholder="Password" id="password_reg" class="form-control" ng-model="vm.user.reg_password"  />
+                                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': form.exam_id.$dirty && form.exam_id.$error.required }">
+                                <select name="exam_id"  id="exam_id" class="form-control" ng-model="vm.user.exam_id" required>
+                                    <option value="" selected>Select Exam</option>
+                                    <option value="{{exam.id}}" ng-repeat="exam in vm.exams">{{exam.name}}</option>
+                                </select>
+                                <span ng-show="form.exam_id.$dirty && form.exam_id.$error.required" class="help-block">Exam is required</span>
+                            </div>
+
+                            <div class="form-group" ng-show="vm.user.enable_ref_username" ng-class="{ 'has-error': form.ref_username.$dirty && form.ref_username.$error.required }">
+                                <input class="form-control" placeholder="refer username (optional)" type="text" name="ref_username" id="ref_username" ng-model="vm.user.ref_username" >
+                                <span ng-show="form.ref_username.$dirty && form.ref_username.$error.required" class="help-block">refer username is required</span>
+                            </div>
+
+                            <div class="form-group" ng-show="vm.user.enable_buy_plan" ng-class="{ 'has-error': form.exam_id.$dirty && form.exam_id.$error.required }">
+                                <select name="plan_id"  id="plan_id" class="form-control" ng-model="vm.user.buy_plan" >
+                                    <option value="" selected>Select Plan</option>
+                                    <option value="s" >Silver Plan</option>
+                                    <option value="g" >Gold Plan</option>
+                                    <option value="p" >Platinum Plan</option>
+                                </select>
+                                <span ng-show="form.exam_id.$dirty && form.exam_id.$error.required" class="help-block">Exam is required</span>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input name="remember" type="checkbox" value="Remember Me" required>I Agree with <a href="#"> Terms & Conditions</a>
+                                </label>
+                            </div>
+                            <div class="btn-danger" style="text-align: center">
+                                {{ vm.regError }}
+                            </div>
+                            <br>
+                            <h4 ng-show="vm.user.enable_buy_plan">
+                                Checkout: {{ vm.plans[vm.user.buy_plan].name }} Plan @ {{ vm.plans[vm.user.buy_plan].price }} &#8377;
+                            </h4>
+                            <div class="form-actions">
+                                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-lg btn-success btn-block">
+                                    {{ (vm.user.enable_buy_plan)?'Pay Now':'Register'}}
+                                    <img ng-if="vm.dataLoadingReg" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                </button>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h4>
+                <i>
+                    if you have any problem contact at info@shatkonlabs.com or Call at 9599075955
+                </i>
+            </h4>
+        </div>
+    </div>
+
+
 
 </div>
-<!-- /#wrapper -->
+

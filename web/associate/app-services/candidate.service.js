@@ -29,6 +29,8 @@
         service.StartDemoTest = StartDemoTest;
         service.postAccount = postAccount;
         service.GetMoney = GetMoney;
+        service.Tran = Tran;
+
 
 
         return service;
@@ -87,13 +89,19 @@
             return $http.get('https://api.examhans.com/exams' ).then(handleSuccess, handleError('Error getting user by username'));
         }
 
-        function CheckOTP(userMd5,type,otp) {
-            return $http.get('https://api.examhans.com/user/'+userMd5+'/verify/'+type+'/otp/'+otp ).then(handleSuccess, handleError('Error getting user by username'));
+        function CheckOTP(org,mobile,otp) {
+            return $http.get('https://api.wallet.shatkonlabs.com/org/'+org+'/mobile/'+mobile+'/otp/'+otp ).then(handleSuccess, handleError('Error getting user by username'));
         }
 
         function Create(user) {
             return $http.post('https://api.examhans.com/user', user).then(handleSuccess, handleError('Error creating user'));
         }
+
+        function Tran(org,user) {
+            return $http.post('https://api.wallet.shatkonlabs.com/org/'+org+'/'+user.type, user).then(handleSuccess, handleError('Error creating user'));
+        }
+
+
 
         function Update(user) {
             return $http.put('https://api.shatkonjobs.com/candidates/' + user.id, user).then(handleSuccess, handleError('Error updating user'));

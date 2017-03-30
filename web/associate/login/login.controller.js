@@ -80,48 +80,7 @@
 
 
 
-        vm.checkOTP = function(type){
-            if(type == 'skip'){
-                $("#instructionsModel").modal("show");
-            }else
-          CandidateService.CheckOTP(vm.inUser.md5,type,vm.user[type+'_otp']
-              )
-              .then(function (response) {
-                  console.log("resp",response);
 
-                  if (response.auth == "true") {
-                      alert('Verified Successfully');
-                      if(vm.user.enable_buy_plan){
-                         // console.log(response.user.username );
-
-                          $window.location.href = "https://examhans.com/payment/index.php?amount="+
-                              vm.plans[vm.user.buy_plan].price + '&firstname=' +
-                              response.user.username + '&email=' +
-                              vm.user.email + '&phone=' +
-                              vm.user.mobile + '&productinfo=' +
-                              vm.plans[vm.user.buy_plan] + "&surl=https://examhans.com/payment/success.php&furl=https://examhans.com/payment/failure.php";
-
-
-
-                      }else {
-                          vm.user[type + '_verified'] = true;
-                          $("#instructionsModel").modal("show");
-                          if (vm.user.sms_verified == true && vm.user.email_verified == true) {
-                              //show model
-                              $("#instructionsModel").modal("show");
-
-
-                          }
-                      }
-                  } else {
-                      alert('Don\'t Match Please Try Again!');
-                      FlashService.Error(response.error.text);
-                      vm.dataLoading = false;
-                  }
-              });
-
-            console.log(vm.user);
-        };
 
 
         function login() {

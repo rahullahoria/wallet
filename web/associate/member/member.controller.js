@@ -42,19 +42,11 @@
 
             //loadMonths();
             loadUser();
-            loadToCallCandidates();
+            //loadToCallCandidates();
 
         }
 
-        vm.setCurrentMon = function(){
-            //console.log("i am in setCurrentMonth",vm.currentMonthIndex);
 
-            vm.whichMonth.name = vm.threeMonths[vm.currentMonthIndex].name;
-            vm.whichMonth.num = vm.threeMonths[vm.currentMonthIndex].num;
-            console.log("i am in setCurrentMonth",vm.whichMonth);
-            loadToCallCandidates();
-
-        }
 
 
 
@@ -74,76 +66,46 @@
         }
 
 
-        vm.startTest = function(topicId,noOfQuestion,testId,topicName,subjectName,atomic){
-            console.log(topicId);
-            if(testId)
-                $location.path('/test/'+testId+'/result');
-            else
-                CandidateService.StartTest(vm.inUser.md5,
-                        {
-                        "topic_id":topicId,
-                        "no_of_question":noOfQuestion,
-                            "atomic":atomic
-                         }
-                    )
+        vm.date1 = new Date().getDate();
+
+
+
+        vm.transaction = function(){
+            vm.user.associate_id = vm.inUser.id;
+
+
+
+                CandidateService.Tran(vm.inUser.org_id,vm.user)
                     .then(function (response) {
-                        vm.subjects = response.response;
+                        console.log("resp",response);
 
-                        console.log('member',vm.subjects);
-
-                        $cookieStore.put('tests', JSON.stringify(vm.subjects));
-                        $cookieStore.put('topic_name', topicName);
-                        $cookieStore.put('subject_name', subjectName);
-
-                        $location.path('/test');
+                        vm.showVerification = true;
                     });
-
-
-
 
         }
 
+        vm.checkOTP = function(type){
 
+                CandidateService.CheckOTP(vm.inUser.org_id,vm.user.mobile,vm.user.otp
+                    )
+                    .then(function (response) {
+                        console.log("resp",response);
 
-        vm.loadToCallCandidates = loadToCallCandidates;
+                        if (response.auth == "true") {
+                            alert('Verified Successfully');
 
-        vm.date1 = new Date().getDate();
-        vm.getFun = function(work){
-           return Math.floor((Math.random() * (work/60/60)) + (work/60/60/4));
+                        } else {
+                            alert('Don\'t Match Please Try Again!');
+                            FlashService.Error(response.error.text);
+                            vm.dataLoading = false;
+                        }
+                    });
+
+            console.log(vm.user);
         };
 
 
 
-        function loadToCallCandidates(){
-            vm.dataLoading = true;
-
-            CandidateService.GetStatus(vm.inUser.md5)
-                .then(function (response) {
-                    vm.subjects = response.subjects;
-
-
-                    for(var i = 0; i < vm.subjects.length; i++){
-                        var temp = 0;
-                        for(var j = 0; j< vm.subjects[i].topics.length; j++){
-                            temp += vm.subjects[i].topics[j].no_of_question*1;
-
-
-                        }
-                        vm.subjects[i].subjectTotalQ = temp;
-                        vm.subjects[i].noOfTopics = vm.subjects[i].topics.length;
-                    }
-
-                    console.log('inside controller',vm.subjects);
-                });
-
-        }
-
-        /*function loadCurrentUser() {
-            UserService.GetByUsername($rootScope.globals.currentUser.username)
-                .then(function (user) {
-                    vm.user = user;
-                });
-        }*/
 
         function loadAllUsers() {
             UserService.GetAll()

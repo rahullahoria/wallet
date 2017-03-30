@@ -23,8 +23,8 @@ function userAuth(){
                 FROM stores where poc_mobile=:mobile and password=:password;";
             break;
         case 'till':
-            $sql = "SELECT *
-                FROM associates where mobile=:mobile and password=:password;";
+            $sql = "SELECT a.id, a.name, a.mobile, b.id as store_id, b.name as store_name, c.name as org_name, c.id as org_id
+                FROM associates as a INNER JOIN stores as b INNER orgs as c where a.store_id = b.id and b.org_id = c.id mobile=:mobile and password=:password;";
             break;
         default:
             $sql = "SELECT *
