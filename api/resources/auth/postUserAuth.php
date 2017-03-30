@@ -24,7 +24,7 @@ function userAuth(){
             break;
         case 'till':
             $sql = "SELECT a.id, a.name, a.mobile, b.id as store_id, b.name as store_name, c.name as org_name, c.id as org_id
-                FROM associates as a INNER JOIN stores as b INNER orgs as c where a.store_id = b.id and b.org_id = c.id
+                FROM associates as a INNER JOIN stores as b INNER JOIN orgs as c where a.store_id = b.id and b.org_id = c.id
                 and a.mobile=:mobile and a.password=:password;";
             break;
         default:
