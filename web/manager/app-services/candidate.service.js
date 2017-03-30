@@ -51,9 +51,9 @@
             });
         }
 
-        function GetStatus(userMD5) {
+        function GetStatus(org) {
             return $http
-                .get('https://api.examhans.com/user/'+userMD5+'/status')
+                .get('https://api.wallet.shatkonlabs.com/org/'+org+'/stores')
                 .then(handleSuccess, handleError('Error getting all users'));
         }
 

@@ -37,16 +37,24 @@
         initController();
 
         function initController() {
-          //  loadCurrentUser();
-           // loadAllUsers();
+            //  loadCurrentUser();
+            // loadAllUsers();
 
             //loadMonths();
             loadUser();
-            //loadToCallCandidates();
+            loadToCallCandidates();
 
         }
 
+        vm.setCurrentMon = function(){
+            //console.log("i am in setCurrentMonth",vm.currentMonthIndex);
 
+            vm.whichMonth.name = vm.threeMonths[vm.currentMonthIndex].name;
+            vm.whichMonth.num = vm.threeMonths[vm.currentMonthIndex].num;
+            console.log("i am in setCurrentMonth",vm.whichMonth);
+            loadToCallCandidates();
+
+        }
 
 
 
@@ -66,45 +74,61 @@
         }
 
 
-        vm.date1 = new Date().getDate();
-
-
-
-        vm.transaction = function(){
-            vm.user.associate_id = vm.inUser.id;
-
-
-
-                CandidateService.Tran(vm.inUser.org_id,vm.user)
+        vm.startTest = function(topicId,noOfQuestion,testId,topicName,subjectName,atomic){
+            console.log(topicId);
+            if(testId)
+                $location.path('/test/'+testId+'/result');
+            else
+                CandidateService.StartTest(vm.inUser.md5,
+                    {
+                        "topic_id":topicId,
+                        "no_of_question":noOfQuestion,
+                        "atomic":atomic
+                    }
+                    )
                     .then(function (response) {
-                        console.log("resp",response);
+                        vm.subjects = response.response;
 
-                        vm.showVerification = true;
+                        console.log('member',vm.subjects);
+
+                        $cookieStore.put('tests', JSON.stringify(vm.subjects));
+                        $cookieStore.put('topic_name', topicName);
+                        $cookieStore.put('subject_name', subjectName);
+
+                        $location.path('/test');
                     });
+
+
+
 
         }
 
-        vm.checkOTP = function(type){
 
-                CandidateService.CheckOTP(vm.inUser.org_id,vm.user.mobile,vm.user.sms_otp
-                    )
-                    .then(function (response) {
-                        console.log("resp",response);
 
-                        if (response.auth == "true") {
-                            alert('Verified Successfully');
+        vm.loadToCallCandidates = loadToCallCandidates;
 
-                        } else {
-                            alert('Don\'t Match Please Try Again!');
-                            FlashService.Error(response.error.text);
-                            vm.dataLoading = false;
-                        }
-                    });
-
-            console.log(vm.user);
+        vm.date1 = new Date().getDate();
+        vm.getFun = function(work){
+            return Math.floor((Math.random() * (work/60/60)) + (work/60/60/4));
         };
 
 
+
+        function loadToCallCandidates(){
+            vm.dataLoading = true;
+
+            CandidateService.GetStatus(vm.inUser.id)
+                .then(function (response) {
+                    vm.amounts = response.store_details.amounts;
+                    vm.stores = response.store_details.stores;
+
+
+
+
+                    console.log('inside controller',vm.amounts,vm.stores);
+                });
+
+        }
 
 
         function loadAllUsers() {
@@ -116,9 +140,9 @@
 
         function deleteUser(id) {
             UserService.Delete(id)
-            .then(function () {
-                loadAllUsers();
-            });
+                .then(function () {
+                    loadAllUsers();
+                });
         }
 
 

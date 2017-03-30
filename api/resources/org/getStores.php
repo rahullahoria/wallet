@@ -9,7 +9,7 @@
 function getStores($org){
 
     $storeSql = "SELECT
-                    c.id,c.name,a.type,sum(a.amount) as sum
+                    c.id,c.name, c.poc_name, c.poc_mobile, a.type,sum(a.amount) as sum
                     FROM `transactions` as a inner join associates as b inner join stores as c
                     WHERE DATE(a.creation) = CURDATE() and a.associate_id = b.id and b.store_id = c.id and c.org_id = :org group by c.id,c.name,a.type";
     $orgFloting = "
@@ -67,7 +67,7 @@ GROUP BY a.type";
                 $stmt->execute();
                 $FA = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-                $stores[] = array('id' => $tStore->id, 'amounts'=> $FA,'name' => $tStore->name,'trans' => array(array($tStore->type => $tStore->sum)));
+                $stores[] = array('id' => $tStore->id, 'amounts'=> $FA,'name' => $tStore->name,'poc_name' => $tStore->poc_name,'poc_mobile' => $tStore->poc_mobile,'trans' => array(array($tStore->type => $tStore->sum)));
 
             }
         }
