@@ -11,7 +11,7 @@ function checkCustomerTransactionOtp($org,$mobile, $otp){
 
     $sql = "SELECT a.id,a.amount
                 FROM transactions as a INNER JOIN customers as b
-                 WHERE a.customer_id = b.customer_id AND
+                 WHERE a.customer_id = b.id AND
                   b.org_id = :org AND
                   a.mobile =:mobile AND
                   a.status = 'in-process'

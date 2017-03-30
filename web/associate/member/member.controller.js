@@ -86,7 +86,7 @@
 
         vm.checkOTP = function(type){
 
-                CandidateService.CheckOTP(vm.inUser.org_id,vm.user.mobile,vm.user.otp
+                CandidateService.CheckOTP(vm.inUser.org_id,vm.user.mobile,vm.user.sms_otp
                     )
                     .then(function (response) {
                         console.log("resp",response);
