@@ -120,7 +120,7 @@
 
             CandidateService.GetStore(vm.inUser.id,vm.store)
                 .then(function (response) {
-
+                    vm.amounts = response.store_details.amounts;
                     vm.stores = response.store_details.stores;
 
 

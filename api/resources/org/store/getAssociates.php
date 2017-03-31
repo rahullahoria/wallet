@@ -63,7 +63,7 @@ GROUP BY a.type";
                 if($tStore->id == $store['id']){
                     $done = true;
                     //var_dump($tStore,$store['trans']);
-                    $stores[$i]['trans']= array_merge($store['trans'],  array(array($tStore->type => $tStore->sum)));
+                    $stores[$i]['trans']= array_merge($store['trans'],  array(array('type'=>$tStore->type,'amount' => $tStore->sum)));
 
 
                 }
@@ -77,7 +77,7 @@ GROUP BY a.type";
                     'id' => $tStore->id,
                     'poc_name' => $tStore->name,
                     'poc_mobile' => $tStore->mobile,
-                    'trans' => array(array($tStore->type => $tStore->sum)));
+                    'trans' => array(array('type'=>$tStore->type,'amount' => $tStore->sum)));
 
             }
         }

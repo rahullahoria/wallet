@@ -127,7 +127,6 @@
                                 <tr>
                                     <th>POC <i class="fa fa-bicycle fa-fw"></i></th></th>
                                     <th>Today <i class="fa fa-question-circle fa-fw"></i></th>
-                                    <th>Overall <i class="fa fa-university fa-fw"></i></th></th>
                                     <th>Status <i class="fa fa-coffee  fa-fw"></i></th></th>
 
                                 </tr>
@@ -141,14 +140,12 @@
                                         {{store.poc_name}} ({{store.poc_mobile}})
                                     </td>
                                     <td>
-                                        <span ng-repeat="tran in store.trans">{{ tran}}: {{tran[tran]}}</span>
+                                        <p ng-repeat="amount in store.trans">{{ amount.type|uppercase}} : &#8377{{amount.amount}}</p>
+
 
                                     </td>
 
-                                    <td>
-                                        <span ng-repeat="amount in store.amounts">{{ amount.type}}: {{amount.amount}}</span>
-                                    </td>
-                                    <td>{{ (topic.amount_made==null)?'Start Test':'Done' }} </td>
+                                    <td>Active</td>
 
 
                                 </tr>
