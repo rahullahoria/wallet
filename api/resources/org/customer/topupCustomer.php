@@ -18,7 +18,7 @@ function topupCustomer($org){
           ( `org_id`, `associate_id`, `mobile`,`creation`)
           VALUES (:org,:associate_id,:mobile,:creation)";
 
-    $sqlSelectCustomer = "Select id from customers where mobile=:mobile and org_id=:org";
+    $sqlSelectCustomer = "Select id from customers where mobile=:mobile ";
 
     $creditSql = "INSERT INTO `transactions`(`amount`, `type`, `customer_id`,`associate_id`, sms_otp, status,`validity` )
                     VALUES (:amount,:type,:customer_id,:associate_id,:sms_otp, 'in-process', null)";
@@ -34,7 +34,7 @@ function topupCustomer($org){
         //var_dump($requestJson);
 
         $stmt->bindParam("mobile", $requestJson->mobile);
-        $stmt->bindParam("org", $org);
+        //$stmt->bindParam("org", $org);
 
 
         $stmt->execute();

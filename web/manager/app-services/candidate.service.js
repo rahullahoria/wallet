@@ -31,6 +31,7 @@
         service.GetMoney = GetMoney;
         service.Tran = Tran;
         service.GetStore = GetStore;
+        service.GetCustomers = GetCustomers;
 
 
 
@@ -61,6 +62,12 @@
         function GetStore(org,store) {
             return $http
                 .get('https://api.wallet.shatkonlabs.com/org/'+org+'/store/'+store)
+                .then(handleSuccess, handleError('Error getting all users'));
+        }
+
+        function GetCustomers(org) {
+            return $http
+                .get('https://api.wallet.shatkonlabs.com/org/'+org+'/customers')
                 .then(handleSuccess, handleError('Error getting all users'));
         }
 
