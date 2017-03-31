@@ -30,8 +30,7 @@ SELECT a.type,sum( a.amount ) as amount
 FROM `transactions` AS a
 INNER JOIN associates AS b
 INNER JOIN stores AS c
-WHERE DATE( a.creation ) = CURDATE( )
-AND a.associate_id = b.id
+WHERE  a.associate_id = b.id
 AND b.store_id = c.id
 AND c.org_id =:org
 AND b.store_id =:store_id
