@@ -71,8 +71,6 @@ GROUP BY a.type";
             }
             if($done == false){
 
-
-
                 $stores[] = array(
                     'id' => $tStore->id,
                     'poc_name' => $tStore->name,
@@ -92,11 +90,6 @@ GROUP BY a.type";
         $returnArr['amounts'] = $stmt->fetchAll(PDO::FETCH_OBJ);
         $returnArr['stores'] = $stores;
 
-
-
-
-
-
         $db = null;
 
         echo '{"store_details": ' . json_encode($returnArr) . '}';
@@ -105,7 +98,7 @@ GROUP BY a.type";
 
     } catch (Exception $e) {
         //error_log($e->getMessage(), 3, '/var/tmp/php.log');
-        echo '{"error":{"text":"' . $e->getMessage() . '"}}';
+        echo '{"error":{"text":"' . $e->getMessage().' ' .$e->getLine(). '"}}';
     }
 
 
