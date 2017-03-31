@@ -63,10 +63,11 @@ GROUP BY a.type;
 
                 $stores[] = array(
                     'id' => $tStore->id,
-                    'amounts'=> $FA,
-                    'name' => $tStore->name,
-                    'poc_name' => $tStore->poc_name,
-                    'poc_mobile' => $tStore->poc_mobile,
+
+                    'first_name' => $tStore->first_name,
+                    'last_name' => $tStore->last_name,
+                    'email' => $tStore->email,
+                    'mobile' => $tStore->mobile,
                     'trans' => array(array($tStore->type => $tStore->sum)));
 
             }
