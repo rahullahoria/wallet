@@ -81,9 +81,8 @@ GROUP BY a.type";
                 $stores[] = array(
                     'id' => $tStore->id,
                     'amounts'=> $FA,
-                    'name' => $tStore->name,
-                    'poc_name' => $tStore->poc_name,
-                    'poc_mobile' => $tStore->poc_mobile,
+                    'poc_name' => $tStore->name,
+                    'poc_mobile' => $tStore->mobile,
                     'trans' => array(array($tStore->type => $tStore->sum)));
 
             }
