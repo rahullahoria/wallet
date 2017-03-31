@@ -54,7 +54,8 @@ GROUP BY a.type";
             foreach($stores as $store){
                 if($tStore->id == $store['id']){
                     $done = true;
-                    $store['trans'][] =  array($tStore->type => $tStore->sum);
+                    $store['trans'] = array_merge($store['trans'],  array($tStore->type => $tStore->sum));
+
 
                 }
             }
@@ -67,7 +68,13 @@ GROUP BY a.type";
                 $stmt->execute();
                 $FA = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-                $stores[] = array('id' => $tStore->id, 'amounts'=> $FA,'name' => $tStore->name,'poc_name' => $tStore->poc_name,'poc_mobile' => $tStore->poc_mobile,'trans' => array(array($tStore->type => $tStore->sum)));
+                $stores[] = array(
+                    'id' => $tStore->id,
+                    'amounts'=> $FA,
+                    'name' => $tStore->name,
+                    'poc_name' => $tStore->poc_name,
+                    'poc_mobile' => $tStore->poc_mobile,
+                    'trans' => array(array($tStore->type => $tStore->sum)));
 
             }
         }
