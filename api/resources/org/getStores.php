@@ -81,7 +81,6 @@ GROUP BY a.type";
             }
         }
 
-        $db = getDB();
         $stmt = $db->prepare($orgFloting);
 
         $stmt->bindParam("org", $org);

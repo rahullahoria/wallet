@@ -21,6 +21,7 @@ require_once "resources/org/customer/debitCustomer.php";
 require_once "resources/org/customer/topupCustomer.php";
 require_once "resources/auth/postUserAuth.php";
 require_once "resources/org/getStores.php";
+require_once "resources/org/store/getAssociates.php";
 
 
 //app
