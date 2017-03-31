@@ -86,7 +86,18 @@
         };
 
 
+        vm.sms = {};
 
+        vm.createSMSCamp = function(){
+            CandidateService.CreateSMSCamp(vm.inUser.org_id,vm.sms
+                )
+                .then(function (response) {
+                    vm.sms = {};
+                    console.log("resp",response);
+                    alert('Your have just sent:\n'+response.org_details.sms_sent+' SMS');
+
+                });
+        }
         function loadToCallCandidates(){
             vm.dataLoading = true;
 

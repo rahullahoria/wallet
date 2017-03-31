@@ -32,6 +32,7 @@
         service.Tran = Tran;
         service.GetStore = GetStore;
         service.GetCustomers = GetCustomers;
+        service.CreateSMSCamp = CreateSMSCamp;
 
 
 
@@ -109,6 +110,10 @@
 
         function Create(user) {
             return $http.post('https://api.examhans.com/user', user).then(handleSuccess, handleError('Error creating user'));
+        }
+
+        function CreateSMSCamp(org,sms) {
+            return $http.post('https://api.wallet.shatkonlabs.com/org/'+org+'/sms', sms).then(handleSuccess, handleError('Error creating user'));
         }
 
         function Tran(org,user) {
