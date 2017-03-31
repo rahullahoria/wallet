@@ -50,14 +50,17 @@ GROUP BY a.type";
         $stores = array();
         foreach($tStores as $tStore){
             $done = false;
+            $i=0;
             foreach($stores as $store){
+
                 if($tStore->id == $store['id']){
                     $done = true;
                     //var_dump($tStore,$store['trans']);
-                    $store['trans']= array_merge($store['trans'],  array(array($tStore->type => $tStore->sum)));
+                    $stores[$i]['trans']= array_merge($store['trans'],  array(array($tStore->type => $tStore->sum)));
 
 
                 }
+                $i++;
             }
             if($done == false){
                 $stmt = $db->prepare($storeFloatingAmount);
