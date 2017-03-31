@@ -70,17 +70,11 @@ GROUP BY a.type";
                 $i++;
             }
             if($done == false){
-                $stmt = $db->prepare($storeFloatingAmount);
 
-                $stmt->bindParam("org", $org);
-                $stmt->bindParam("store_id", $store);
 
-                $stmt->execute();
-                $FA = $stmt->fetchAll(PDO::FETCH_OBJ);
 
                 $stores[] = array(
                     'id' => $tStore->id,
-                    'amounts'=> $FA,
                     'poc_name' => $tStore->name,
                     'poc_mobile' => $tStore->mobile,
                     'trans' => array(array($tStore->type => $tStore->sum)));
@@ -88,13 +82,14 @@ GROUP BY a.type";
             }
         }
 
-        /*$db = getDB();
-        $stmt = $db->prepare($orgFloting);
+
+        $stmt = $db->prepare($storeFloatingAmount);
 
         $stmt->bindParam("org", $org);
+        $stmt->bindParam("store_id", $store);
 
         $stmt->execute();
-        $returnArr['amounts'] = $stmt->fetchAll(PDO::FETCH_OBJ);*/
+        $returnArr['amounts'] = $stmt->fetchAll(PDO::FETCH_OBJ);
         $returnArr['stores'] = $stores;
 
 
