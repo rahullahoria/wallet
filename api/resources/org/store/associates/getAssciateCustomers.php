@@ -65,6 +65,8 @@ function getAssociateCustomers($org,$store,$associate){
         }
 
 
+        $returnArr['customers'] = $stores;
+
         $db = null;
 
         echo '{"org_details": ' . json_encode($returnArr) . '}';
