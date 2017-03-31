@@ -22,7 +22,7 @@ $app->response->headers->set('Content-Type', 'application/json');
 
 $app->post('/org/:org/credit', 'topupCustomer');
 $app->post('/org/:org/debit', 'debitCustomer');
-$app->get('/org/:org/sms/:sms', 'smsOrgCamp');
+$app->post('/org/:org/sms', 'smsOrgCamp');
 $app->get('/org/:org/stores', 'getStores');
 $app->get('/org/:org/customers', 'getOrgCustomers');
 $app->get('/org/:org/store/:store', 'getAssociates');

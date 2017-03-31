@@ -6,7 +6,7 @@
  * Time: 4:23 PM
  */
 
-function smsOrgCamp($org,$sms){
+function smsOrgCamp($org){
     $storeSql = "SELECT
                     DISTINCT
                     b.mobile
@@ -19,6 +19,10 @@ function smsOrgCamp($org,$sms){
                     b.org_id = :org
                     ";
 
+    $request = \Slim\Slim::getInstance()->request();
+
+    $requestJson = json_decode($request->getBody());
+
     try {
 
         $db = getDB();
@@ -29,7 +33,7 @@ function smsOrgCamp($org,$sms){
         $stmt->execute();
         $customers = $stmt->fetchAll(PDO::FETCH_OBJ);
         foreach($customers as $customer){
-            sendSMS($customer->mobile,$sms);
+            sendSMS($customer->mobile,$requestJson->sms);
         }
         $db = null;
 
