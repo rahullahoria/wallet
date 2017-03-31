@@ -37,6 +37,12 @@
                 controllerAs: 'vm'
 
             })
+            .when('/store/:id', {
+                controller: 'StoreController',
+                templateUrl: 'store/store.view.html',
+                controllerAs: 'vm'
+
+            })
 
             .when('/test', {
                 controller: 'TestController',

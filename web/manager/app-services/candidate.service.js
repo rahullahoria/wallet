@@ -30,6 +30,7 @@
         service.postAccount = postAccount;
         service.GetMoney = GetMoney;
         service.Tran = Tran;
+        service.GetStore = GetStore;
 
 
 
@@ -54,6 +55,12 @@
         function GetStatus(org) {
             return $http
                 .get('https://api.wallet.shatkonlabs.com/org/'+org+'/stores')
+                .then(handleSuccess, handleError('Error getting all users'));
+        }
+
+        function GetStore(org,store) {
+            return $http
+                .get('https://api.wallet.shatkonlabs.com/org/'+org+'/store/'+store)
                 .then(handleSuccess, handleError('Error getting all users'));
         }
 
