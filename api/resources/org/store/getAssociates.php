@@ -54,6 +54,14 @@ GROUP BY a.type";
         $stmt->execute();
         $tStores = $stmt->fetchAll(PDO::FETCH_OBJ);
 
+        $stmt = $db->prepare($storeFloatingAmount);
+
+        $stmt->bindParam("org", $org);
+        $stmt->bindParam("store_id", $store);
+
+        $stmt->execute();
+        $returnArr['amounts'] = $stmt->fetchAll(PDO::FETCH_OBJ);
+
         $stores = array();
         foreach($tStores as $tStore){
             $done = false;
@@ -81,13 +89,7 @@ GROUP BY a.type";
         }
 
 
-        $stmt = $db->prepare($storeFloatingAmount);
 
-        $stmt->bindParam("org", $org);
-        $stmt->bindParam("store_id", $store);
-
-        $stmt->execute();
-        $returnArr['amounts'] = $stmt->fetchAll(PDO::FETCH_OBJ);
         $returnArr['stores'] = $stores;
 
         $db = null;
