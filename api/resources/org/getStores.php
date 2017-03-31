@@ -18,8 +18,7 @@ SELECT a.type, sum( a.amount ) as amount
 FROM `transactions` AS a
 INNER JOIN associates AS b
 INNER JOIN stores AS c
-WHERE DATE( a.creation ) = CURDATE( )
-AND a.associate_id = b.id
+WHERE a.associate_id = b.id
 AND b.store_id = c.id
 AND c.org_id =1
 AND b.store_id =1
@@ -54,7 +53,7 @@ GROUP BY a.type";
             foreach($stores as $store){
                 if($tStore->id == $store['id']){
                     $done = true;
-                    //$store['trans'] = array_merge($store['trans'],  array($tStore->type => $tStore->sum));
+                    $store['trans']= array_merge($store['trans'],  array($tStore->type => $tStore->sum));
 
 
                 }
