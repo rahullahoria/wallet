@@ -53,7 +53,7 @@ GROUP BY a.type";
             foreach($stores as $store){
                 if($tStore->id == $store['id']){
                     $done = true;
-                    var_dump($tStore);
+                    var_dump($tStore,$store['trans']);
                     $store['trans']= array_merge($store['trans'],  array($tStore->type => $tStore->sum));
 
 
