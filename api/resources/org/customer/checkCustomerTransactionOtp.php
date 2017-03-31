@@ -9,7 +9,7 @@
 function checkCustomerTransactionOtp($org,$mobile, $otp){
 
 
-    $sql = "SELECT a.id,a.amount
+    $sql = "SELECT a.id,a.amount,a.type
                 FROM transactions as a INNER JOIN customers as b
                  WHERE a.customer_id = b.id AND
                   b.org_id = :org AND
