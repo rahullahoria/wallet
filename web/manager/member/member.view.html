@@ -10,12 +10,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">ExamHans | Learn and Earn</a>
+            <a class="navbar-brand" href="index.html">My Wallet | you digital wallet</a>
         </div>
         <!-- /.navbar-header -->
         <ul class="nav navbar-top-links navbar-right">
 
-            <li><a href="#/employee/{{ vm.inUser.md5_id }}"><i class="fa fa-user fa-fw"></i> {{ vm.inUser.username}}</a>
+            <li><a href="#/employee/{{ vm.inUser.md5_id }}"><i class="fa fa-user fa-fw"></i> {{ vm.inUser.poc_name}}</a>
             </li>
             <!--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings </a>
             </li>-->
@@ -37,9 +37,9 @@
                         <a href="#/member" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
 
-                    <!--<li>
-                        <a href="#/employee/{{ vm.inUser.md5_id }}"><i class="fa fa-table fa-fw"></i> My Performance</a>
-                    </li>-->
+                    <li>
+                        <a href="#/customers"><i class="fa fa-table fa-fw"></i> Customers</a>
+                    </li>
 
                     <!--<li>
                         <a href="#"><i class="glyphicon glyphicon-cog fa-fw"></i> Settings</a>
@@ -138,20 +138,23 @@
                                 <tr ng-repeat="store in vm.stores"  class="{{ (topic.amount_made==null)?'warning':'success' }}">
 
                                     <td>
-                                        {{store.name}}
+                                        <a href="#/store/{{store.id}}" >{{store.name|uppercase}}</a>
                                     </td>
                                     <td>
-                                        {{store.poc_name}} ({{store.poc_mobile}})
+                                        {{store.poc_name|uppercase}} ({{store.poc_mobile}})
                                     </td>
                                     <td>
-                                        <span ng-repeat="tran in store.trans">{{ tran}}: {{tran[tran]}}</span>
+                                        <span>CREDIT: {{store.trans[0]['credit']}}</span>
+                                        <span>GIFT_CREDIT: {{store.trans['gift_credit']}}</span>
+                                        <span>PRO_CREDIT: {{store.trans['pro_credit']}}</span>
+                                        <span>DEBIT: {{store.trans['debit']}}</span>
 
                                     </td>
 
                                     <td>
-                                        <span ng-repeat="amount in store.amounts">{{ amount.type}}: {{amount.amount}}</span>
+                                        <p ng-repeat="amount in store.amounts">{{ amount.type|uppercase}} : &#8377{{amount.amount}}</p>
                                     </td>
-                                    <td>{{ (topic.amount_made==null)?'Start Test':'Done' }} </td>
+                                    <td>Active </td>
 
 
                                 </tr>
