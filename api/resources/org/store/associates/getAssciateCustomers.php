@@ -6,7 +6,7 @@
  * Time: 7:36 PM
  */
 
-function getOrgCustomers($org){
+function getOrgCustomers($org,$store,$associate){
 
     $storeSql = "SELECT
                     b.id,b.first_name, b.last_name, b.email,b.mobile, a.type,sum(a.amount) as sum
@@ -16,19 +16,10 @@ function getOrgCustomers($org){
                     WHERE
 
                     a.customer_id = b.id and
-                    b.org_id = :org
+                    b.org_id = :org and
+                    a.associate_id = :associate
                     group by a.customer_id,a.type";
-    $orgFloting = "
 
-SELECT a.type, sum( a.amount ) as amount
-FROM `transactions` AS a
-INNER JOIN associates AS b
-INNER JOIN stores AS c
-WHERE a.associate_id = b.id
-AND b.store_id = c.id
-AND c.org_id =:org
-GROUP BY a.type;
-";
 
 
 
@@ -38,6 +29,7 @@ GROUP BY a.type;
         $stmt = $db->prepare($storeSql);
 
         $stmt->bindParam("org", $org);
+        $stmt->bindParam("associate", $associate);
 
         $stmt->execute();
         $tStores = $stmt->fetchAll(PDO::FETCH_OBJ);

@@ -23,6 +23,7 @@ require_once "resources/auth/postUserAuth.php";
 require_once "resources/org/getStores.php";
 require_once "resources/org/getOrgCustomers.php";
 require_once "resources/org/store/getAssociates.php";
+require_once "resources/org/store/associates/getAssciateCustomers.php";
 
 
 //app
