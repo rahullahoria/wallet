@@ -58,7 +58,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Dashboard</h1>
+                <h1 class="page-header"><a href="#/member" class="active">Dashboard </a>/ Customers</h1>
             </div>
 
         </div>
@@ -97,7 +97,7 @@
 
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <i class="fa fa-list fa-fw"></i> {{ subject.subject_name }} | Total Question <i class="fa fa-question-circle fa-fw"></i> : {{subject.subjectTotalQ}} | Topics <i class="fa fa-anchor fa-fw"></i> : {{ subject.noOfTopics }}
+                        <i class="fa fa-list fa-fw"></i> All Customers
                         <!--<div class="pull-right">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -127,8 +127,7 @@
                                 <tr>
                                     <th>POC <i class="fa fa-bicycle fa-fw"></i></th></th>
                                     <th>Today <i class="fa fa-question-circle fa-fw"></i></th>
-                                    <th>Overall <i class="fa fa-university fa-fw"></i></th></th>
-                                    <th>Status <i class="fa fa-coffee  fa-fw"></i></th></th>
+
 
                                 </tr>
                                 </thead>
@@ -138,17 +137,14 @@
 
 
                                     <td>
-                                        {{store.poc_name}} ({{store.poc_mobile}})
+                                        {{store.first_name}} {{store.last_name}}({{store.mobile}})
                                     </td>
                                     <td>
-                                        <span ng-repeat="tran in store.trans">{{ tran}}: {{tran[tran]}}</span>
+                                        <p ng-repeat="amount in store.trans">{{ amount.type|uppercase}} : &#8377{{amount.amount}}</p>
 
                                     </td>
 
-                                    <td>
-                                        <span ng-repeat="amount in store.amounts">{{ amount.type}}: {{amount.amount}}</span>
-                                    </td>
-                                    <td>{{ (topic.amount_made==null)?'Start Test':'Done' }} </td>
+
 
 
                                 </tr>

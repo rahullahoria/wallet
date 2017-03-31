@@ -94,6 +94,9 @@
                     vm.inUser = UserService.GetInUser();
 
                     console.log("auth success");
+                    if(vm.inUser.store_id)
+                        $location.path('/store/'+vm.inUser.store_id);
+                    else
                         $location.path('/member');
 
                 } else {

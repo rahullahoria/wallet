@@ -90,10 +90,11 @@
         function loadToCallCandidates(){
             vm.dataLoading = true;
 
-            CandidateService.GetCustomers(vm.inUser.id)
+            CandidateService.GetCustomers(vm.inUser.org_id)
                 .then(function (response) {
 
                     vm.customers = response.org_details.customers;
+                    vm.amounts = response.org_details.amounts;
 
 
 

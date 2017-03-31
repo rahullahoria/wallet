@@ -118,7 +118,7 @@
         function loadToCallCandidates(){
             vm.dataLoading = true;
 
-            CandidateService.GetStore(vm.inUser.id,vm.store)
+            CandidateService.GetStore(vm.inUser.org_id,vm.store)
                 .then(function (response) {
                     vm.amounts = response.store_details.amounts;
                     vm.stores = response.store_details.stores;
