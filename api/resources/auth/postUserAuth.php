@@ -15,11 +15,11 @@ function userAuth(){
 
     switch($user->type){
        case 'org':
-            $sql = "SELECT  `id`,`id` as org_id, `name`, `logo`, `address`, `city`, `poc_name`, `poc_mobile`, `password`, `creation`, `last_update` FROM `orgs`
+            $sql = "SELECT  `id`, `id` as org_id, `name`, `logo`, `address`, `city`, `poc_name`, `poc_mobile`, `password`, `creation`, `last_update`
                         FROM orgs where poc_mobile=:mobile and password=:password;";
             break;
         case 'store':
-            $sql = "SELECT `id`,`id` as store_id , `name`, `password`, `address`, `location`, `poc_name`, `poc_mobile`, `creation`, `last_update`, `org_id`
+            $sql = "SELECT `id`, `id` as store_id , `name`, `password`, `address`, `location`, `poc_name`, `poc_mobile`, `creation`, `last_update`, `org_id`
                 FROM stores where poc_mobile=:mobile and password=:password;";
             break;
         case 'till':
