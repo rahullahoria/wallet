@@ -44,7 +44,7 @@ function checkCustomerTransactionOtp($org,$mobile, $otp){
 
                 $stmt->execute();
             }
-            if($tran->type == 'debit'){
+            if($tran[0]->type == 'debit'){
                 $at = $trans[0]->amount;
             }
             else
