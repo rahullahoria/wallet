@@ -93,6 +93,7 @@
 
                         if (response.auth == "true") {
                             alert('Verified Successfully');
+                            vm.showVerification = false;
 
                         } else {
                             alert('Don\'t Match Please Try Again!');
