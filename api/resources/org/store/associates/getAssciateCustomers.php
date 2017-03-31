@@ -6,7 +6,7 @@
  * Time: 7:36 PM
  */
 
-function getOrgCustomers($org,$store,$associate){
+function getAssociateCustomers($org,$store,$associate){
 
     $storeSql = "SELECT
                     b.id,b.first_name, b.last_name, b.email,b.mobile, a.type,sum(a.amount) as sum
