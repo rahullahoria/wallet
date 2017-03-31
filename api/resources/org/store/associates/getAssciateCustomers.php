@@ -64,18 +64,6 @@ function getAssociateCustomers($org,$store,$associate){
             }
         }
 
-        $stmt = $db->prepare($orgFloting);
-
-        $stmt->bindParam("org", $org);
-
-        $stmt->execute();
-        $returnArr['amounts'] = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $returnArr['customers'] = $stores;
-
-
-
-
-
 
         $db = null;
 
