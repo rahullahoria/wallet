@@ -12,11 +12,16 @@ function getOrgCustomers($org){
                     b.id,b.first_name, b.last_name, b.email,b.mobile, a.type,sum(a.amount) as sum
                     FROM
                     `transactions` as a inner join
-                    customers as b
+                    customers as b INNER JOIN
+                    associates as c INNER JOIN
+                    stores as d
+
                     WHERE
 
                     a.customer_id = b.id and
-                    b.org_id = :org
+                    a.associate_id = c.id AND
+                    c.store_id = d.id and
+                    d.org_id = :org
                     group by a.customer_id,a.type";
     $orgFloting = "
 

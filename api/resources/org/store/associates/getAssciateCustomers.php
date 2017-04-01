@@ -16,7 +16,7 @@ function getAssociateCustomers($org,$store,$associate){
                     WHERE
 
                     a.customer_id = b.id and
-                    b.org_id = :org and
+
                     a.associate_id = :associate
                     group by a.customer_id,a.type";
 

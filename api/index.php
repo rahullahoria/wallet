@@ -26,6 +26,12 @@ require_once "resources/org/getOrgCustomers.php";
 require_once "resources/org/store/getAssociates.php";
 require_once "resources/org/store/associates/getAssciateCustomers.php";
 
+require_once "resources/customer/loadCustomer.php";
+require_once "resources/org/addStore.php";
+require_once "resources/auth/changePassword.php";
+require_once "resources/org/customer/getOrgCustomer.php";
+require_once "resources/org/store/addAssociate.php";
+
 
 //app
 require_once "app.php";

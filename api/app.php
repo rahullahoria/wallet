@@ -24,13 +24,20 @@ $app->post('/org/:org/credit', 'topupCustomer');
 $app->post('/org/:org/debit', 'debitCustomer');
 $app->post('/org/:org/sms', 'smsOrgCamp');
 $app->get('/org/:org/stores', 'getStores');
+$app->post('/org/:org/store', 'addStore');
 $app->get('/org/:org/customers', 'getOrgCustomers');
+$app->get('/org/:org/customer/:mobile', 'getOrgCustomer');
 $app->get('/org/:org/store/:store', 'getAssociates');
+$app->post('/org/:org/store/:store/associate', 'addAssociate');
 $app->get('/org/:org/store/:store/associate/:associate', 'getAssociateCustomers');
 $app->get('/org/:org/mobile/:mobile/otp/:otp', 'checkCustomerTransactionOtp');
+$app->get('/customer/:mobile', 'loadCustomer');
+
+
 
 
 $app->post('/auth', 'userAuth');
+$app->post('/change_password', 'changePassword');
 
 /* Ending Routes */
 

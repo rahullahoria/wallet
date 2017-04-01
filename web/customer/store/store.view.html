@@ -1,0 +1,174 @@
+﻿
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">My Wallet | your digital wallet</a>
+        </div>
+        <!-- /.navbar-header -->
+        <ul class="nav navbar-top-links navbar-right">
+
+            <li><a href="#"><i class="fa fa-user fa-fw"></i> {{ vm.inUser.poc_name}}</a>
+            </li>
+            <!--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings </a>
+            </li>-->
+            <li class="divider"></li>
+            <li><a ng-click="vm.logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+            </li>
+
+
+
+        </ul>
+
+
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+
+                    <li>
+                        <a href="#/{{ (vm.inUser.store_id)?'store/'+vm.inUser.store_id:'member'}}" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    </li>
+
+                    <li>
+                        <a href="#/customers"><i class="fa fa-table fa-fw"></i> Customers</a>
+                    </li>
+
+                    <!--<li>
+                        <a href="#"><i class="glyphicon glyphicon-cog fa-fw"></i> Settings</a>
+                    </li>-->
+                    <li>
+                        <a ng-click="vm.logout()"><i class="glyphicon glyphicon-off fa-fw"></i> Logout</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header" ng-hide="vm.inUser.store_id"><a href="#/member" class="active" >Dashboard</a> / Store</h1>
+                <h1 class="page-header" ng-show="vm.inUser.store_id">Dashboard</h1>
+            </div>
+
+        </div>
+        <!-- /.row -->
+        <br/>
+        <p>Store Summery</p>
+        <div class="row">
+            <div class="col-lg-3 col-md-6" ng-repeat="amount in vm.amounts">
+                <div class="panel {{ ($index == vm.currentShow)?'panel-success':'panel-primary' }}">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa   fa-5x">&#8377</i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div ><b>{{ amount.type }}</b></div>
+                                <div> &#8377{{amount.amount}} </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <span class="pull-left">Overall</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12" >
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <i class="fa fa-list fa-fw"></i> Store Summery
+                        <!--<div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                    {{ vm.whichMonth.name }}
+                                    <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right" role="menu">
+                                    <li ng-repeat="month in vm.threeMonths" >
+                                        <a ng-click="vm.currentMonthIndex=$index;vm.setCurrentMon()">{{ month.name }}</a>
+                                    </li>
+
+                                    <li class="divider"></li>
+                                    <li><a href="">Currently for {{ vm.whichMonth.name }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>-->
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body" >
+                        <div class="table-responsive">
+
+                            <table datatable="ng"  class="table table-bordered table-hover table-striped" style="max-width: 99%;">
+                                <thead>
+                                <tr>
+                                    <th>Associates <i class="fa fa-bicycle fa-fw"></i></th></th>
+                                    <th>Today <i class="fa fa-question-circle fa-fw"></i></th>
+                                    <th>Status <i class="fa fa-coffee  fa-fw"></i></th></th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr ng-repeat="store in vm.stores"  class="{{ (topic.amount_made==null)?'warning':'success' }}">
+
+
+                                    <td>
+                                        {{store.poc_name}} ({{store.poc_mobile}})
+                                    </td>
+                                    <td>
+                                        <p ng-repeat="amount in store.trans">{{ amount.type|uppercase}} : &#8377{{amount.amount}}</p>
+
+
+                                    </td>
+
+                                    <td>Active</td>
+
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+
+                <hr>
+            </div>
+            <!-- /.col-lg-8 -->
+
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
