@@ -42,15 +42,16 @@ function changePassword(){
         // var_dump($user);die();
 
         $stmt->execute();
-        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        //$users = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 
         $db = null;
 
-        if(count($users) == 1)
-            echo '{"user": ' . json_encode($users[0]) . ',"auth": "true"}';
-        else
-            echo '{"auth": "false"}';
+
+            echo '{"auth": "true"}';
+        /*else
+            echo '{"auth": "false"}';*/
 
 
     } catch (PDOException $e) {

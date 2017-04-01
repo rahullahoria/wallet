@@ -81,6 +81,8 @@
         vm.changePassword = function(){
             vm.dataLoading = true;
 
+            vm.user.id = vm.inUser.id;
+
             CandidateService.ChangePassword(vm.user)
                 .then(function (response){
                     console.log("resp",response);
