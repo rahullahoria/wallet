@@ -78,6 +78,9 @@
                 CandidateService.Tran(vm.inUser.org_id,vm.user)
                     .then(function (response) {
                         console.log("resp",response);
+                        if(response.error){
+                            alert(response.error.text);
+                        }else
 
                         vm.showVerification = true;
                     });
@@ -103,6 +106,26 @@
                     });
 
             console.log(vm.user);
+        };
+
+        vm.searchCustomer = null;
+
+        vm.search = function(){
+            vm.searchCustomer = null;
+
+            if(vm.user.mobile) {
+                CandidateService.SearchCustomer(vm.inUser.org_id, vm.user.mobile
+                    )
+                    .then(function (response) {
+
+
+                        vm.searchCustomer = response.org_details.customers[0];
+                        console.log("resp", response,vm.searchCustomer);
+
+
+                    });
+            }
+
         };
 
 

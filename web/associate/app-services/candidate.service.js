@@ -30,6 +30,7 @@
         service.postAccount = postAccount;
         service.GetMoney = GetMoney;
         service.Tran = Tran;
+        service.SearchCustomer = SearchCustomer;
 
 
 
@@ -54,6 +55,11 @@
         function GetStatus(userMD5) {
             return $http
                 .get('https://api.examhans.com/user/'+userMD5+'/status')
+                .then(handleSuccess, handleError('Error getting all users'));
+        }
+        function SearchCustomer(org,mobile) {
+            return $http
+                .get('https://api.wallet.shatkonlabs.com/org/'+org+'/customer/'+mobile)
                 .then(handleSuccess, handleError('Error getting all users'));
         }
 
