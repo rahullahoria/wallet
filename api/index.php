@@ -32,6 +32,9 @@ require_once "resources/auth/changePassword.php";
 require_once "resources/org/customer/getOrgCustomer.php";
 require_once "resources/org/store/addAssociate.php";
 
+require_once "resources/auth/checkUser.php";
+require_once "resources/customer/regCustomer.php";
+
 
 //app
 require_once "app.php";

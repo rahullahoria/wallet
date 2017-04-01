@@ -33,6 +33,9 @@ $app->get('/org/:org/store/:store/associate/:associate', 'getAssociateCustomers'
 $app->get('/org/:org/mobile/:mobile/otp/:otp', 'checkCustomerTransactionOtp');
 $app->get('/customer/:mobile', 'loadCustomer');
 
+$app->post('/customer/:mobile','regCustomer');
+$app->get('/check_customer/:mobile','checkUser');
+
 
 
 
