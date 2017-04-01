@@ -33,6 +33,9 @@
         service.GetStore = GetStore;
         service.GetCustomers = GetCustomers;
         service.CreateSMSCamp = CreateSMSCamp;
+        service.CreateStore = CreateStore;
+        service.CreateStoreAssociate = CreateStoreAssociate;
+        service.ChangePassword = ChangePassword;
 
 
 
@@ -114,6 +117,16 @@
 
         function CreateSMSCamp(org,sms) {
             return $http.post('https://api.wallet.shatkonlabs.com/org/'+org+'/sms', sms).then(handleSuccess, handleError('Error creating user'));
+        }
+
+        function CreateStore(org,store) {
+            return $http.post('https://api.wallet.shatkonlabs.com/org/'+org+'/store', store).then(handleSuccess, handleError('Error creating user'));
+        }
+        function ChangePassword(user) {
+            return $http.post('https://api.wallet.shatkonlabs.com/change_password', user).then(handleSuccess, handleError('Error creating user'));
+        }
+        function CreateStoreAssociate(org,store,associate) {
+            return $http.post('https://api.wallet.shatkonlabs.com/org/'+org+'/store/'+store+'/associate', associate).then(handleSuccess, handleError('Error creating user'));
         }
 
         function Tran(org,user) {

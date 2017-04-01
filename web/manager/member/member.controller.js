@@ -74,34 +74,7 @@
         }
 
 
-        vm.startTest = function(topicId,noOfQuestion,testId,topicName,subjectName,atomic){
-            console.log(topicId);
-            if(testId)
-                $location.path('/test/'+testId+'/result');
-            else
-                CandidateService.StartTest(vm.inUser.md5,
-                    {
-                        "topic_id":topicId,
-                        "no_of_question":noOfQuestion,
-                        "atomic":atomic
-                    }
-                    )
-                    .then(function (response) {
-                        vm.subjects = response.response;
 
-                        console.log('member',vm.subjects);
-
-                        $cookieStore.put('tests', JSON.stringify(vm.subjects));
-                        $cookieStore.put('topic_name', topicName);
-                        $cookieStore.put('subject_name', subjectName);
-
-                        $location.path('/test');
-                    });
-
-
-
-
-        }
 
 
 
@@ -113,6 +86,23 @@
         };
 
 
+
+
+        vm.createStore = function(){
+
+            CandidateService.CreateStore(vm.inUser.org_id,vm.nuser
+                )
+                .then(function (response) {
+                    vm.nuser = {};
+                    console.log("resp",response);
+                    if(response.results.id)
+                    alert('Store Added Successfully');
+                    else
+                        alert('Error: '+response.error.text);
+
+                });
+
+        }
 
         function loadToCallCandidates(){
             vm.dataLoading = true;

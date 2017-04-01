@@ -35,7 +35,7 @@ function changePassword(){
         $db = getDB();
         $stmt = $db->prepare($sql);
 
-        $stmt->bindParam("mobile", $user->mobile);
+
         $stmt->bindParam("password", $user->password);
 
         // var_dump($user);die();
