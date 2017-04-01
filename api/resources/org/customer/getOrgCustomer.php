@@ -60,7 +60,7 @@ GROUP BY a.type;
                     //var_dump($tStore,$store['trans']);
                     $stores[$i]['trans']= array_merge($store['trans'],  array(array('type'=>$tStore->type,'amount' => $tStore->sum)));
 
-                    if($tStores->type == 'debit')
+                    if($tStore->type == 'debit')
                         $stores[$i]['withdrawal'] -= $tStore->sum;
 
                 }
