@@ -31,13 +31,16 @@
         service.GetMoney = GetMoney;
         service.Tran = Tran;
         service.SearchCustomer = SearchCustomer;
+        service.ChangePassword = ChangePassword;
 
 
 
         return service;
 
 
-
+        function ChangePassword(user) {
+            return $http.post('https://api.wallet.shatkonlabs.com/change_password', user).then(handleSuccess, handleError('Error creating user'));
+        }
         function GetMoney(payment){
             var form_data = new FormData();
 

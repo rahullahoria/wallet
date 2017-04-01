@@ -82,6 +82,9 @@
             vm.dataLoading = true;
 
             vm.user.id = vm.inUser.id;
+            if(vm.user.password != vm.user.password2)
+                alert('Password Don\'t match');
+            else
 
             CandidateService.ChangePassword(vm.user)
                 .then(function (response){

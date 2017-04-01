@@ -78,6 +78,22 @@
             console.log(vm.user);
         };
 
+        vm.changePassword = function(){
+            vm.dataLoading = true;
+
+            vm.user.id = vm.inUser.id;
+            if(vm.user.password != vm.user.password2)
+                alert('Password Don\'t match');
+            else
+
+                CandidateService.ChangePassword(vm.user)
+                    .then(function (response){
+                        console.log("resp",response);
+                        vm.dataLoading = false;
+                        alert('Password Changed Successfully');
+                        $location.path('/member');
+                    });
+        }
 
 
 
@@ -94,7 +110,12 @@
                     vm.inUser = UserService.GetInUser();
 
                     console.log("auth success");
+                    if(vm.user.mobile != vm.user.password)
                         $location.path('/member');
+                    else {
+                        vm.cp = true;
+                        vm.dataLoading = false;
+                    }
 
                 } else {
                     FlashService.Error(resp.message);

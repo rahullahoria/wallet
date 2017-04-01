@@ -130,6 +130,21 @@
                 });
 
         }
+        vm.createStoreAssociate = function(){
+
+            CandidateService.CreateStoreAssociate(vm.inUser.org_id,vm.store,vm.nuser
+                )
+                .then(function (response) {
+                    vm.nuser = {};
+                    console.log("resp",response);
+                    if(response.results.id)
+                        alert('Store Added Successfully');
+                    else
+                        alert('Error: '+response.error.text);
+
+                });
+
+        }
 
 
         function loadAllUsers() {

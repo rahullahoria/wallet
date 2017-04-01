@@ -80,9 +80,11 @@
                         console.log("resp",response);
                         if(response.error){
                             alert(response.error.text);
-                        }else
+                        }else {
 
-                        vm.showVerification = true;
+
+                            vm.showVerification = true;
+                        }
                     });
 
         }
@@ -97,6 +99,7 @@
                         if (response.auth == "true") {
                             alert('Verified Successfully');
                             vm.showVerification = false;
+                            vm.user = {}
 
                         } else {
                             alert('Don\'t Match Please Try Again!');
@@ -127,6 +130,8 @@
             }
 
         };
+
+
 
 
 
