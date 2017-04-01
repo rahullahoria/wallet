@@ -14,13 +14,13 @@ function changePassword(){
 
     switch($user->type){
         case 'org':
-            $sql = "update orgs set password=:password where id=:org";
+            $sql = "update orgs set password=:password where id=:id";
             break;
         case 'store':
-            $sql = "update stores set password=:password where id=:store";
+            $sql = "update stores set password=:password where id=:id";
             break;
         case 'till':
-            $sql = "update associates set password=:password where id=:associate";
+            $sql = "update associates set password=:password where id=:id";
             break;
         default:
             $sql = "SELECT *
@@ -37,6 +37,7 @@ function changePassword(){
 
 
         $stmt->bindParam("password", $user->password);
+        $stmt->bindParam("id", $user->id);
 
         // var_dump($user);die();
 
