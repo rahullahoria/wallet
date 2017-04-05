@@ -11,9 +11,9 @@ function checkUser($mobile){
 
 
     $sql = "SELECT *
-                FROM users where mobile=:mobile ;";
+                FROM customers where mobile=:mobile ;";
 
-    $sqlUpdateOtp = "UPDATE users set sms_otp =:otp WHERE id=:id";
+    $sqlUpdateOtp = "UPDATE customers set sms_otp =:otp WHERE id=:id";
 
 
 

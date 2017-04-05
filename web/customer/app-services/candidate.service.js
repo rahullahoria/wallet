@@ -33,6 +33,7 @@
         service.GetStore = GetStore;
         service.GetCustomers = GetCustomers;
         service.CreateSMSCamp = CreateSMSCamp;
+        service.GetMobileStatus = GetMobileStatus;
 
 
 
@@ -57,6 +58,12 @@
         function GetStatus(org) {
             return $http
                 .get('https://api.wallet.shatkonlabs.com/org/'+org+'/stores')
+                .then(handleSuccess, handleError('Error getting all users'));
+        }
+
+        function GetMobileStatus(mobile) {
+            return $http
+                .get('https://api.wallet.shatkonlabs.com/check_customer/'+mobile)
                 .then(handleSuccess, handleError('Error getting all users'));
         }
 

@@ -48,6 +48,14 @@
         })();
 
 
+        vm.verMob = function(){
+            CandidateService.GetMobileStatus(vm.user.mobile)
+                .then(
+                    function(resp){
+                        console.log("resp",resp);
+                    }
+                );
+        };
 
         vm.reg = function(){
             vm.dataLoadingReg = true;
