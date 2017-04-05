@@ -31,7 +31,7 @@ function checkUser($mobile){
         $users = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 
-        $db = null;
+
 
         if(count($users) == 1)
             if($users[0]->password)
@@ -55,6 +55,8 @@ function checkUser($mobile){
             }
         else
             echo '{"auth": "false"}';
+
+        $db = null;
 
 
     } catch (PDOException $e) {
