@@ -62,13 +62,13 @@
 
         vm.reg = function(){
             vm.dataLoadingReg = true;
-            CandidateService.Create(vm.user
+            CandidateService.Create(vm.user.mobile,vm.user
                 )
                 .then(function (response) {
                     console.log("resp",response);
 
                     if (response.results && response.results.id) {
-                        AuthenticationService.SetCredentials(vm.user.reg_username, vm.user.reg_password);
+                        AuthenticationService.SetCredentials(vm.user.mobile, vm.user.reg_password);
                         vm.inUser = response.results;
                         vm.inUser.username = vm.inUser.reg_username;
                         $cookieStore.put('inUser', JSON.stringify(vm.inUser));

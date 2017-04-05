@@ -36,7 +36,7 @@ function regCustomer($mobile){
         $stmt->bindParam("first_name", $requestJson->first_name);
         $stmt->bindParam("last_name", $requestJson->last_name);
 
-        $stmt->bindParam("password", $requestJson->mobile);
+        $stmt->bindParam("password", $requestJson->password);
         $stmt->bindParam("email", $requestJson->email);
         $stmt->bindParam("dob", $requestJson->dob);
         $stmt->bindParam("gender", $requestJson->gender);
@@ -47,7 +47,7 @@ function regCustomer($mobile){
 
         $stmt->execute();
 
-        $requestJson->error = $stmt->errorInfo();
+        $requestJson->rows = $stmt->rowCount();
 
 
         $db = null;

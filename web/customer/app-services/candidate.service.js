@@ -115,8 +115,8 @@
             return $http.get('https://api.wallet.shatkonlabs.com/org/'+org+'/mobile/'+mobile+'/otp/'+otp ).then(handleSuccess, handleError('Error getting user by username'));
         }
 
-        function Create(user) {
-            return $http.post('https://api.examhans.com/user', user).then(handleSuccess, handleError('Error creating user'));
+        function Create(mobile,user) {
+            return $http.post('https://api.wallet.shatkonlabs.com/customer/'+mobile, user).then(handleSuccess, handleError('Error creating user'));
         }
 
         function CreateSMSCamp(org,sms) {
