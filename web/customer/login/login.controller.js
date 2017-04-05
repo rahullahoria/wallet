@@ -11,20 +11,10 @@
 
         vm.login = login;
         vm.user = {};
-        vm.plans = {s:{name:'Silver',price:1000},g:{name:'Gold',price:2000},p:{name:'Platinum',price:5000}};
         vm.user.username = "";
         vm.user.password = "";
         vm.inUser = null;
-        vm.regR = ($location.search().rt != undefined)?true:false;
-        vm.user.ref_username = ($location.search().ref_user != undefined)?$location.search().ref_user:'';
-        vm.user.enable_buy_plan = ($location.search().bp != undefined)?true:false;
-        vm.user.buy_plan = ($location.search().bp != undefined)?$location.search().bp:'';
-        if(vm.user.ref_username){
-            vm.user.enable_ref_username = false;
-        }
-        else
-        vm.user.enable_ref_username = true;
-        console.log('rt', $location.search().rt);
+
 
         (function initController() {
             // reset login status
@@ -49,6 +39,9 @@
 
 
         vm.verMob = function(){
+            if(vm.takePs){
+                vm.login();
+            }else
             CandidateService.GetMobileStatus(vm.user.mobile)
                 .then(
                     function(resp){
@@ -56,6 +49,8 @@
                         if(resp.password == 'false'){
                             vm.showVerification = true;
                         }
+                        else
+                            vm.takePs = true;
                     }
                 );
         };
@@ -67,21 +62,20 @@
                 .then(function (response) {
                     console.log("resp",response);
 
-                    if (response.results && response.results.id) {
-                        AuthenticationService.SetCredentials(vm.user.mobile, vm.user.reg_password);
+                    if (response.results && response.results.rows == 1) {
+                        AuthenticationService.SetCredentials(vm.user.mobile, vm.user.password);
                         vm.inUser = response.results;
-                        vm.inUser.username = vm.inUser.reg_username;
+                        vm.inUser.username = vm.inUser.mobile;
                         $cookieStore.put('inUser', JSON.stringify(vm.inUser));
                         vm.dataLoadingReg = false;
 
                         vm.showVerification = true;
 
                         console.log("auth success in user",vm.inUser);
-                        //$location.path('/member');
+                        $location.path('/member');
 
                     } else {
-                        FlashService.Error(response.error.text);
-                        vm.regError = response.error.text;
+                        alert("OTP don't Match!");
                         vm.dataLoadingReg = false;
                     }
                 });
@@ -101,13 +95,11 @@
                 console.log("resp",resp);
 
                 if (resp.success) {
-                    AuthenticationService.SetCredentials(vm.user.username, vm.user.password);
+                    AuthenticationService.SetCredentials(vm.user.mobile, vm.user.password);
                     vm.inUser = UserService.GetInUser();
 
                     console.log("auth success");
-                    if(vm.inUser.store_id)
-                        $location.path('/store/'+vm.inUser.store_id);
-                    else
+
                         $location.path('/member');
 
                 } else {

@@ -9,7 +9,7 @@
     <br>
     <br>
 
-    <div class="row"> <!--ng-show="vm.showVerification"-->
+    <div class="row" ng-show="vm.showVerification" >
         <div class="col-md-4 col-md-offset-4">
             <br>
             <br>
@@ -39,13 +39,13 @@
                                     <input style="width: 100%"  id="phone" ng-model="vm.user.gender" placeholder="Gender: *" type="text" minlength="10" required>
                                 </div>
                                 <div class="form-group col-md-6 custom-form">
-                                    <input style="width: 100%"  ng-model="vm.user.dob" placeholder="Date of Birth: *" type="date" required>
+                                    <input style="width: 100%"  ng-model="vm.user.dob" placeholder="Date of Birth: yyyy-mm-dd*" type="date" required>
                                 </div>
                                 <div class="form-group col-md-6 custom-form">
                                     <input style="width: 100%"  ng-model="vm.user.email" placeholder="Email: *" type="email" required>
                                 </div>
                                 <div class="form-group col-md-6 custom-form">
-                                    <input style="width: 100%"  ng-model="vm.user.password" placeholder="password: *" type="email" required>
+                                    <input style="width: 100%"  ng-model="vm.user.password" placeholder="password: *" type="password" required>
                                 </div>
 
                             </div>
@@ -64,7 +64,7 @@
 
                             </div>
 
-                            <a class="btn btn-success" ng-click="vm.reg()" >Verify</a>
+                            <a class="btn btn-success" ng-click="vm.reg()" >Update</a>
 
                             <br>
                             <br>
@@ -111,9 +111,13 @@
 
                         <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
                             <input class="form-control" placeholder="Mobile" type="text" name="username" id="username" ng-model="vm.user.mobile" required >
-                            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Email is required</span>
+
                         </div>
 
+                        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }" ng-show="vm.takePs">
+                            <input class="form-control" placeholder="password" type="password" name="username"  ng-model="vm.user.password">
+
+                        </div>
                         <div class="form-actions">
                             <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-lg btn-primary col-md-6" ng-click="vm.user.type = 'org'">Login</button>
                             <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
