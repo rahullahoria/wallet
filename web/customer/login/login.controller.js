@@ -53,6 +53,9 @@
                 .then(
                     function(resp){
                         console.log("resp",resp);
+                        if(resp.password == 'false'){
+                            vm.showVerification = true;
+                        }
                     }
                 );
         };

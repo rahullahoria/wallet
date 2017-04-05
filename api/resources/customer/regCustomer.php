@@ -47,6 +47,8 @@ function regCustomer($mobile){
 
         $stmt->execute();
 
+        $requestJson->error = $stmt->errorInfo();
+
 
         $db = null;
 
