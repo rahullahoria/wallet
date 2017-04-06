@@ -34,7 +34,7 @@ function debitCustomer($org){
                     -
 
 
-    (SELECT
+    ifnull((SELECT
                     sum(a.amount)
                     FROM
                     `transactions` as a inner join
@@ -50,7 +50,7 @@ function debitCustomer($org){
                     d.org_id = :org AND
                     b.mobile = :mobile AND
                     a.type = 'debit'
-                    group by a.customer_id) as balance ";
+                    group by a.customer_id)),0) as balance ";
 
     $creditSql = "INSERT INTO `transactions`(`amount`, `type`, `customer_id`,`associate_id`, sms_otp, status,`validity` )
                     VALUES (:amount,:type,:customer_id,:associate_id,:sms_otp, 'in-process', null)";

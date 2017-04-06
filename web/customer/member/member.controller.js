@@ -58,7 +58,7 @@
 
         function loadUser(){
             vm.inUser = UserService.GetInUser();
-            if(!vm.inUser.name)
+            if(!vm.inUser.first_name)
                 $location.path('/login');
             console.log("in user",vm.inUser);
 
@@ -84,6 +84,26 @@
             CandidateService.GetStatus(vm.inUser.mobile)
                 .then(function (response) {
                     vm.orgs = response.orgs;
+
+                    for(var i = 0;i<vm.orgs.length;i++){
+                        var balance = 0;
+                        var wbalance = 0;
+                        for(var j=0;j<vm.orgs[i].trans.length;j++){
+                            vm.orgs[i].trans[j].amount = 1*vm.orgs[i].trans[j].amount;
+                            if(vm.orgs[i].trans[j].type == 'credit')
+                                wbalance +=vm.orgs[i].trans[j].amount;
+                            if(vm.orgs[i].trans[j].type == 'debit'){
+                                balance -=vm.orgs[i].trans[j].amount;
+                                wbalance -=vm.orgs[i].trans[j].amount;
+                            }
+                            else
+                                balance +=vm.orgs[i].trans[j].amount;
+                        }
+
+                        vm.orgs[i].balance = balance;
+                        vm.orgs[i].wbalance = wbalance;
+
+                    }
                     console.log('inside controller',vm.orgs);
                 });
 
