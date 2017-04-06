@@ -55,9 +55,9 @@
             });
         }
 
-        function GetStatus(org) {
+        function GetStatus(mobile) {
             return $http
-                .get('https://api.wallet.shatkonlabs.com/org/'+org+'/stores')
+                .get('https://api.wallet.shatkonlabs.com/customer/'+mobile)
                 .then(handleSuccess, handleError('Error getting all users'));
         }
 

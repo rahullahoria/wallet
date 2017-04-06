@@ -91,6 +91,26 @@
 
 
         </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12"  ng-repeat="org in vm.orgs">
+
+
+                <img src="{{org.logo}}" />
+
+                {{ org.name}}
+
+                <p ng-repeat="amount in org.trans">{{ amount.type|uppercase}} : &#8377{{amount.amount}}</p>
+
+
+
+
+            </div>
+
+
+            <!-- /.col-lg-8 -->
+
+        </div>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12" >

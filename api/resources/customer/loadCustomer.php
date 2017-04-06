@@ -9,7 +9,7 @@
 function loadCustomer($mobile){
 
     $sql = "SELECT
-                    e.name,e.logo, a.type,sum(a.amount) as sum
+                    e.id as org_id, e.name,e.logo, a.type,sum(a.amount) as sum
                     FROM
                     `transactions` as a inner join
                     customers as b INNER JOIN
@@ -24,7 +24,7 @@ function loadCustomer($mobile){
                     c.store_id = d.id and
                     d.org_id = e.id and
                     b.mobile = :mobile
-                    group by a.customer_id,a.type ";
+                    group by a.customer_id,a.type,e.id ";
 
     try {
 
@@ -34,12 +34,40 @@ function loadCustomer($mobile){
         $stmt->bindParam("mobile", $mobile);
 
         $stmt->execute();
-        $resp['customer'] = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $tStores = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        $stores = array();
+        foreach($tStores as $tStore){
+            $done = false;
+            $i=0;
+            foreach($stores as $store){
+
+                if($tStore->id == $store['id']){
+                    $done = true;
+                    //var_dump($tStore,$store['trans']);
+                    $stores[$i]['trans']= array_merge($store['trans'],  array(array('type'=>$tStore->type,'amount' => $tStore->sum)));
+
+
+                }
+                $i++;
+            }
+            if($done == false){
+
+
+                $stores[] = array(
+                    'org_id' => $tStore->org_id,
+
+                    'org_name' => $tStore->name,
+                    'logo' => $tStore->logo,
+                    'trans' => array(array('type'=>$tStore->type,'amount' => $tStore->sum)));
+
+            }
+        }
 
 
         $db = null;
 
-        echo '{"company_type": ' . json_encode($resp) . '}';
+        echo '{"orgs": ' . json_encode($stores) . '}';
 
 
 
