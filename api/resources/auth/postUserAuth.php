@@ -13,6 +13,8 @@ function userAuth(){
 
     $user = json_decode($request->getBody());
 
+
+
     switch($user->type){
        case 'org':
             $sql = "SELECT  `id`, `id` as org_id, `name`, `logo`, `address`, `city`, `poc_name`, `poc_mobile`, `password`, `creation`, `last_update`
@@ -29,7 +31,7 @@ function userAuth(){
             break;
         default:
             $sql = "SELECT *
-                FROM users where mobile=:mobile and password=:password;";
+                FROM customers where mobile=:mobile and password=:password;";
 
     }
 
