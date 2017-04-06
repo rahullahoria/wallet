@@ -42,7 +42,7 @@ function loadCustomer($mobile){
             $i=0;
             foreach($stores as $store){
 
-                if($tStore->id == $store['id']){
+                if($tStore->org_id == $store['org_id']){
                     $done = true;
                     //var_dump($tStore,$store['trans']);
                     $stores[$i]['trans']= array_merge($store['trans'],  array(array('type'=>$tStore->type,'amount' => $tStore->sum)));
